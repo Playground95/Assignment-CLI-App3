@@ -9,6 +9,7 @@ public class App3{
         final String CLEAR = "\033[H\033[2J";
         final String COLOR_BLUE_BOLD = "\033[34;1m";
         final String COLOR_RED_BOLD = "\033[31;1m";
+        final String COLOR_GREEN_BOLD = "\033[32;1m";
         final String RESET = "\033[0m";
 
         final String DASHBOARD = "Welcome To Smart Banking";
@@ -89,7 +90,8 @@ public class App3{
                     userName = newUserName;
 
                     System.out.println();
-                    System.out.print("\t" + name + " added sucessfully.\n\tDo you want to add new student (Y/n)? ");
+                    //System.out.print("\t" + name + " added sucessfully.\n\tDo you want to add new student (Y/n)? ");
+                    System.out.printf("\t%s%s added sucessfully!%s\n\tDo you want to add new student (Y/n)? ",COLOR_GREEN_BOLD, name, RESET);
                     if (SCANNER.nextLine().strip().toUpperCase().equals("Y")) continue;
                     screen = DASHBOARD;
                     break;
