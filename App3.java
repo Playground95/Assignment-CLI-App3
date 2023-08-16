@@ -23,7 +23,7 @@ public class App3{
         String screen = DASHBOARD;
         String[] userName = new String[0];
 
-
+        loop:
         do {
             final String APP_TITLE = String.format("%s%s%s",
                                 COLOR_BLUE_BOLD, screen, RESET);
@@ -80,6 +80,28 @@ public class App3{
                         }
                     }while(!valid);
 
+                    boolean depositeValidity = true;
+
+                    do{
+                        System.out.println();
+                        System.out.print("\tEnter initial deposite amount: Rs.");
+                        int deposite = SCANNER.nextInt();
+                        SCANNER.nextLine();
+                    
+                        if(deposite<5000){
+                            depositeValidity = false;
+                            System.out.println();
+                            System.out.printf("\t%sMinimum deposite amount should be Rs.5000.00%s\n", COLOR_RED_BOLD, RESET);
+                            System.out.print("\tDo you want to re-enter (Y/n)?  ");
+                            if (SCANNER.nextLine().strip().toUpperCase().equals("Y")) continue;
+                            
+                            screen = DASHBOARD;
+                            continue loop;
+
+                        }
+
+                    }while(!depositeValidity);
+
                     String[] newUserName = new String[userName.length + 1];
                     for (int i = 0; i < userName.length; i++) {
                         
@@ -91,7 +113,7 @@ public class App3{
 
                     System.out.println();
                     //System.out.print("\t" + name + " added sucessfully.\n\tDo you want to add new student (Y/n)? ");
-                    System.out.printf("\t%s%s added sucessfully!%s\n\tDo you want to add new student (Y/n)? ",COLOR_GREEN_BOLD, name, RESET);
+                    System.out.printf("\t%s%s added sucessfully!%s\n\tDo you want to create another Account (Y/n)? ",COLOR_GREEN_BOLD, name, RESET);
                     if (SCANNER.nextLine().strip().toUpperCase().equals("Y")) continue;
                     screen = DASHBOARD;
                     break;
