@@ -20,6 +20,7 @@ public class App3{
         final String DELETE_ACCOUNT = "Delete an Existing Account";
 
         String screen = DASHBOARD;
+        String[] userName = new String[0];
 
 
         do {
@@ -52,6 +53,45 @@ public class App3{
                         case 7: System.out.println(CLEAR); System.exit(0);
                         default: continue;
                     }
+                    break;
+
+                case CREATE_NEW_ACCOUNT:
+                    System.out.printf("\tUser ID: SDB-%05d \n", (userName.length + 1));
+
+                    boolean valid;
+                    String name;
+                    do{
+                        valid = true;
+                        System.out.print("\tEnter User Name: ");
+                        name = SCANNER.nextLine().strip();
+                        if (name.isBlank()){
+                            System.out.printf("\t%sName can't be empty%s\n", COLOR_RED_BOLD, RESET);
+                            valid = false;
+                            continue;
+                        }
+                        for (int i = 0; i < name.length(); i++) {
+                            if (!(Character.isLetter(name.charAt(i)) || 
+                                Character.isSpaceChar(name.charAt(i))) ) {
+                                System.out.printf("\t%sInvalid Name%s\n", COLOR_RED_BOLD, RESET);
+                                valid = false;
+                                break;
+                            }
+                        }
+                    }while(!valid);
+
+                    String[] newUserName = new String[userName.length + 1];
+                    for (int i = 0; i < userName.length; i++) {
+                        
+                        newUserName[i] = userName[i];
+                    }
+                    
+                    newUserName[newUserName.length - 1] = name;
+                    userName = newUserName;
+
+                    System.out.println();
+                    System.out.print("\t" + name + " added sucessfully.\n\tDo you want to add new student (Y/n)? ");
+                    if (SCANNER.nextLine().strip().toUpperCase().equals("Y")) continue;
+                    screen = DASHBOARD;
                     break;
             }
 
